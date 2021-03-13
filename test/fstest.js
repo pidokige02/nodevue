@@ -22,4 +22,6 @@ fs.writeFileSync(msgfile, 'Hello Node.js 이순신!!', (err) => {
 let data2 = fs.readFileSync(msgfile, 'utf-8');
 util.log("data2>>", data2);
 
+util.log("===================================", data2);
+
 //1은 비동기 IO 이기 깨문에  // 2 //3 실행후 //1 에서 정의한 call back 이 실행된다.
