@@ -6,3 +6,5 @@ let url = "https://naver.com";
 utils.ogsinfo(url, (err, ret) => {
   util.log(err, ret);
 });
+
+// utils 의 ogsinfo 의 입력인자 fn 에 위 함수 전체를 넘긴다.
