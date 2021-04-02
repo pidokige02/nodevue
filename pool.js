@@ -10,7 +10,8 @@ Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 
 
 const DB_INFO = {
-  host     : '192.168.25.26',
+  // host     : '192.168.25.19',
+  host     : 'localhost',
   user     : 'pidokige',
   password : 'Feb02pid~',
   database : 'testdb',

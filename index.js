@@ -39,20 +39,6 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true })); // 여러개�
 
 rest(app, pool);
 
-// chrome 에서 localhost:7000 을 실행하면 Hello NodeJS!! 이 화면에 나타남. 
-app.get(('/'), (req, res) => {  // root 에서 요청이 오면 arrow function 안의 내용으로 반응한다.
-  //res.send("Hello NodeJS!!");  
-  //res.json(testJson);  //Sends a JSON response.
-   res.render('index', {name: '홍길동'});  //홍길동이 index.ejs안의 name 에 mapping 되어 출력이된다.
-});
-
-app.get(('/test/:email'), (req, res) => {   // localhost:7000/test/aaa@ddd.com 과 같이 request를 하면 
-   testJson.email = req.params.email;       // {"id":123,"name":"hong kil dong","email":"aaa@ddd.com"} 와 같이 출력된다
-   testJson.aa = req.query.aa;              // localhost:7000/test/aaa@ddd.com?aa=123 와 같이 request 하면 
-                                            // {"id":123,"name":"hong kil dong","email":"aaa@ddd.com","aa":"123"} 와 같이 출력된다.
-   res.json(testJson);  //Sends a JSON response.
-});
-
 
 const server = app.listen(7000, function(){  // Starts a UNIX socket and listens for connections on the given path.
   console.log("Express's started on port 7000");

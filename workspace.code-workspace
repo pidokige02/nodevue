@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\PShell"
+		},
+		{
+			"path": "..\\..\\Python"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "vue/hello"
+		}
+	],
+	"settings": {}
+}
