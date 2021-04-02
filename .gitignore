@@ -1,3 +1,4 @@
+./dist
 /node_modules
 /vue/testvue/node_modules
 /vue/hello/node_modules
