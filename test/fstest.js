@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs'); // default 로 지원되는 것으로 별도의 installation 이 필요없다
 const util = require('util');
 
 console.log("aaaaaaaaaaaaa")          //  시간이 표시되지 않는 log

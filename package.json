@@ -22,13 +22,13 @@
   "homepage": "https://github.com/indiflex/nodevue#readme",
   "dependencies": {
     "bluebird": "^3.7.2",
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.19.1",
     "crypto-js": "^3.3.0",
     "ejs": "^2.7.4",
-    "express": "^4.17.1",
+    "express": "^4.17.2",
     "hashmap": "^2.4.0",
     "mysql": "^2.18.1",
-    "open-graph-scraper": "^4.7.1",
+    "open-graph-scraper": "^4.11.0",
     "socker.io": "0.0.0-alpha-beta",
     "socket.io": "^2.4.1"
   },
