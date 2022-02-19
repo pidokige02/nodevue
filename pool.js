@@ -1,12 +1,13 @@
 // connection pool을 singleton을 이용하여 관리해주는 class module
+// dn 관리 connection pool 을 관리하는 code
 
 const mysql   = require("mysql"),
       util    = require('util'),
       Promise = require("bluebird");
 
 Promise.promisifyAll(mysql);  //별도 process 를 사용하는 module 을 then 을 사용하여 synchronous 한 logic 을 사용할 수 있다.
-Promise.promisifyAll(require("mysql/lib/Connection").prototype);
-Promise.promisifyAll(require("mysql/lib/Pool").prototype);
+Promise.promisifyAll(require("mysql/lib/Connection").prototype);  // connection 을 promisify 함
+Promise.promisifyAll(require("mysql/lib/Pool").prototype);  // Pool 을 promisify 함.
 
 
 const DB_INFO = {
@@ -21,7 +22,7 @@ const DB_INFO = {
 };
 
 
-// A, B, C, D, E 
+// A, B, C, D, E
 // connection 시마다 0,5 초가 걸리는 것을 기존에 만든 것을 재사용하여 물리적인 network 비용을 줄일수 있다..
 
 module.exports = class {
@@ -37,7 +38,7 @@ module.exports = class {
     });
   }
 
-  end() {  // 주로 application 에서 사용하고 serer 종료시에 호출해주면 된다. 
+  end() {  // 주로 application 에서 사용하고 serer 종료시에 호출해주면 된다.
     this.pool.end( function(err) {
       util.log(">>>>>>>>>>>>>>>>>>>>>>>>>>> End of Pool!!");
       if (err)
@@ -45,5 +46,3 @@ module.exports = class {
     });
   }
 };
-
-

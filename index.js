@@ -37,8 +37,30 @@ app.use( (req, res, next) => {
 app.use(bodyParser.json({limit: '10mb'}));  // json 을 10MB로 걸어둔다.
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true })); // 여러개의 json 이 와도 연결시키겎다.
 
-rest(app, pool);
+rest(app, pool);  // 아래 api 를 rest 에 모아 두고 호출함.
 
+// app.get(('/apis/replies/:bno'), (req, res) => {  // localhost:7000/apis/replies/65 과 같이 request를 하면
+//   let bno = req.params.bnor;
+//   let mydb = new Mydb(pool);  // 위에서 만든 pool을 Mydb 로 넘긴다.
+//   mydb.execute( conn => {
+//     conn.query("select * from Reply where bno=? limit 10", [bno], (err, ret) => {  // user 는 params 에서 넘어온 것임
+//       res.json(ret);
+//     });
+//   });
+// });
+
+// 게시글의 댓글을 수정하겠다.
+// body parser 가 install 되어 있어야 parsing 이 가능하다.
+// app.put(('/apis/replies/:bno/:rno'), (req, res) => {  // localhost:7000/apis/replies/65 과 같이 request를 하면
+//   let bno = req.params.bno;
+//   let rno = req.params.rno;
+//   let mydb = new Mydb(pool);  // 위에서 만든 pool을 Mydb 로 넘긴다.
+//   mydb.execute( conn => {
+//     conn.query("select * from Reply where bno=? limit 10", [bno], (err, ret) => {  // user 는 params 에서 넘어온 것임
+//       res.json(ret);
+//     });
+//   });
+// });
 
 const server = app.listen(7000, function(){  // Starts a UNIX socket and listens for connections on the given path.
   console.log("Express's started on port 7000");

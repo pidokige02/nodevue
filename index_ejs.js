@@ -1,8 +1,8 @@
-// 실행방법 node indexejs.js 실행 후 chrome 에서 localhost:7000 을 실행한다.
+// 실행방법 node index_ejs.js 실행 후 chrome 에서 localhost:7000 을 실행한다.
 // ejg 와 db access test codes 임
 
-const express = require('express'),  // include module node js 에서 사용하는 websesrver
-  app = express();
+const express = require('express'),   // include module node js 에서 사용하는 websesrver
+  app = express();                    // init express, not run express
 
 const Pool = require('./pool'),     // myaql access module
       Mydb = require('./mydb');
@@ -12,7 +12,7 @@ const testJson = require('./test/test.json');
 const pool = new Pool();
 
 app.use(express.static('public'));  //To serve static files such as images, CSS files, and JavaScript files,
-                                    //ㅕse the express.static built-in middleware function in express to declare
+                                    //use the express.static built-in middleware function in express to declare
 
 app.set('views', __dirname + '/views');   // __dirname + '/views directory 를 'views' 로 하겠다고 express 에 신고한다.
 app.set('view engine', 'ejs');            // view engine 을 ejs를 쓰겠다고 express 신고하는 것임.
@@ -25,8 +25,9 @@ app.get(('/'), (req, res) => {  // root 에서 요청이 오면 arrow function �
    res.render('index', {name: '홍길동'});  //홍길동이 index.ejs안의 name 에 mapping 되어 출력이된다.
 });
 
+//:email 은 URI 에서 변수값을 가지고 온다.
 app.get(('/test/:email'), (req, res) => {   // localhost:7000/test/aaa@ddd.com 과 같이 request를 하면
-   testJson.email = req.params.email;       // {"id":123,"name":"hong kil dong","email":"aaa@ddd.com"} 와 같이 출력된다
+   testJson.email = req.params.email;       // {"id":123,"name":"hong kil dong","email":"aaa@ddd.com"} 와 같이 "email" 이 추가되어 출력된다
    testJson.aa = req.query.aa;              // localhost:7000/test/aaa@ddd.com?aa=123 와 같이 request 하면
                                             // {"id":123,"name":"hong kil dong","email":"aaa@ddd.com","aa":"123"} 와 같이 출력된다.
    res.json(testJson);  //Sends a JSON response.

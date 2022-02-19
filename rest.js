@@ -1,7 +1,7 @@
 const Mydb = require('./mydb');
 
 module.exports = function(app, pool) {  // class 는 아니고 utility 성 function 을 모아 둔것임
-  
+
   app.post(('/apis/adminkey'), (req, res) => {
     let key = req.body.key;
     if (key == '1212' || key == 'surveykey!!!') {
@@ -12,16 +12,16 @@ module.exports = function(app, pool) {  // class 는 아니고 utility 성 funct
   });
 
   // survey
-  app.get(('/apis/surveys'), (req, res) => {   // localhost:7000/test/aaa@ddd.com 과 같이 request를 하면 
+  app.get(('/apis/surveys'), (req, res) => {   // localhost:7000/test/aaa@ddd.com 과 같이 request를 하면
     let mydb = new Mydb(pool);
     mydb.execute( conn => {
       conn.query("select * from Survey limit 1000", (err, ret) => {
         res.json(ret);
       });
     });
-  });                    
-  
-  app.get(('/apis/surveys/:id'), (req, res) => {   // localhost:7000/test/aaa@ddd.com 과 같이 request를 하면 
+  });
+
+  app.get(('/apis/surveys/:id'), (req, res) => {   // localhost:7000/test/aaa@ddd.com 과 같이 request를 하면
     let id = req.params.id;
     let mydb = new Mydb(pool);
     mydb.execute( conn => {
@@ -30,9 +30,9 @@ module.exports = function(app, pool) {  // class 는 아니고 utility 성 funct
         res.json(ret[0]);  // 하나만 나갈것임
       });
     });
-  });                    
-  
-  app.put(('/apis/surveys/:id'), (req, res) => {   // localhost:7000/test/aaa@ddd.com 과 같이 request를 하면 
+  });
+
+  app.put(('/apis/surveys/:id'), (req, res) => {   // localhost:7000/test/aaa@ddd.com 과 같이 request를 하면
     let id = req.params.id,
         title = req.body.title,
         state = req.body.state;
@@ -42,12 +42,12 @@ module.exports = function(app, pool) {  // class 는 아니고 utility 성 funct
         res.json(ret.affectedRows);
       });
     });
-  });                    
+  });
 
   // 등록하는 부분
-  app.post(('/apis/surveys'), (req, res) => {   // localhost:7000/test/aaa@ddd.com 과 같이 request를 하면 
+  app.post(('/apis/surveys'), (req, res) => {   // localhost:7000/test/aaa@ddd.com 과 같이 request를 하면
     let title = req.body.title;
-  
+
     let mydb = new Mydb(pool);
     mydb.executeTx( conn => {
       conn.query("insert into Survey(title, state) value(?, 0)",[title], (err, ret) => {
@@ -55,22 +55,22 @@ module.exports = function(app, pool) {  // class 는 아니고 utility 성 funct
         res.json(ret.affectedRows);
       });
     });
-  });                    
+  });
 
 
-  // chrome 에서 localhost:7000 을 실행하면 Hello NodeJS!! 이 화면에 나타남. 
+  // chrome 에서 localhost:7000 을 실행하면 Hello NodeJS!! 이 화면에 나타남.
   app.get(('/'), (req, res) => {  // root 에서 요청이 오면 arrow function 안의 내용으로 반응한다.
-    //res.send("Hello NodeJS!!");  
+    //res.send("Hello NodeJS!!");
     //res.json(testJson);  //Sends a JSON response.
     res.render('index', {name: '홍길동'});  //홍길동이 index.ejs안의 name 에 mapping 되어 출력이된다.
   });
 
-  app.get(('/test/:email'), (req, res) => {   // localhost:7000/test/aaa@ddd.com 과 같이 request를 하면 
+  app.get(('/test/:email'), (req, res) => {   // localhost:7000/test/aaa@ddd.com 과 같이 request를 하면
     testJson.email = req.params.email;       // {"id":123,"name":"hong kil dong","email":"aaa@ddd.com"} 와 같이 출력된다
-    testJson.aa = req.query.aa;              // localhost:7000/test/aaa@ddd.com?aa=123 와 같이 request 하면 
+    testJson.aa = req.query.aa;              // localhost:7000/test/aaa@ddd.com?aa=123 와 같이 request 하면
                                               // {"id":123,"name":"hong kil dong","email":"aaa@ddd.com","aa":"123"} 와 같이 출력된다.
     res.json(testJson);  //Sends a JSON response.
-  });                    // cf. req.body, req.query     
+  });                    // cf. req.body, req.query
 
   app.get('/apis/replies/:bno', (req, res) => {  // localhost:7000/apis/replies/265 과 같이 request를 하면
     let bno = req.params.bno;
@@ -82,6 +82,7 @@ module.exports = function(app, pool) {  // class 는 아니고 utility 성 funct
     });
   });
 
+  // 뎃글 하나만 가지고 온다.
   app.get('/apis/replies/:bno/:rno', (req, res) => {
     let bno = req.params.bno,
         rno = req.params.rno;
@@ -121,5 +122,5 @@ module.exports = function(app, pool) {  // class 는 아니고 utility 성 funct
         res.json(ret);
       });
     });
-  });  
+  });
 };

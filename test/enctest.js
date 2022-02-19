@@ -14,5 +14,6 @@ util.log("enc=", dec);
 let shaEnc = utils.encryptSha2(str);
 util.log("shaEnc=", shaEnc);
 
-// 암호와 확인을 위하여 아래 command 를  mysql을 사용할 수 있다.  실제는 동작하지 않았음.
+// 암호와 확인을 위하여 아래 command 를  mysql을 사용할 수 있다.  실제는 동작하지 않았음. mysql 8.0 에서
 // select password("NodeJS", SHA2("NodeJS", 256),  SHA2(concat("NodeJS", "nodevue")), 256);
+// select password("NodeJS");
